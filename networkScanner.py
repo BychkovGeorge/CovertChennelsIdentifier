@@ -53,7 +53,7 @@ for k in range(len(list_of_network_addresses)):
     counter = 1
     while counter < len(list_of_network_addresses):
         if k != counter:
-            packet = IPv6(dst=list_of_network_addresses[counter]) / IPv6ExtHdrRouting(addresses=[list_of_network_addresses[k]], segleft=2) / ICMPv6EchoRequest(data=RandString(7), verbose=0) / TCP(dport=22)
+            packet = IPv6(dst=list_of_network_addresses[counter]) / IPv6ExtHdrRouting(addresses=[list_of_network_addresses[k]], segleft=1) / TCP(dport=22)
             if channel_type == "1":
                 packet.tc = 18
             elif channel_type == "2":
@@ -70,7 +70,8 @@ for k in range(len(list_of_network_addresses)):
                 print("Ошибка ввода")
                 raise SystemExit
             answer = sr(packet, timeout=4)
-            if len(answer[0]) != 0 and not hasattr(answer[0][0][1], "type"):
+            if len(answer[0]) != 0:
+                print(answer[0][0])
                 result_matrix[k + 1][counter + 1] = 1
                 result_matrix[counter + 1][k + 1] = 1
         counter += 1
