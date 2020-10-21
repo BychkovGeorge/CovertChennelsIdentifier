@@ -41,7 +41,7 @@ for j in range(len(list_of_network_addresses)):
         print("Ошибка ввода")
         raise SystemExit
     answer = sr(packet, timeout=4)
-    if len(answer[0]) != 0:
+    if len(answer[0]) != 0 and not hasattr(answer[0][0][1], "type"):
         result_matrix[0][j + 1] = 1
         result_matrix[j + 1][0] = 1
 
@@ -66,7 +66,7 @@ for k in range(len(list_of_network_addresses)):
                 print("Ошибка ввода")
                 raise SystemExit
             answer = sr(packet, timeout=4)
-            if len(answer[0]) != 0:
+            if len(answer[0]) != 0 and not hasattr(answer[0][0][1], "type"):
                 result_matrix[k + 1][counter + 1] = 1
                 result_matrix[counter + 1][k + 1] = 1
         counter += 1
