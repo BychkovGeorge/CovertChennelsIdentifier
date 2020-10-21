@@ -3,8 +3,10 @@
 import os
 import sys
 from scapy.layers.inet import ICMP, IP, TCP
-from scapy.layers.inet6 import IPv6, IPv6ExtHdrRouting
+from scapy.layers.inet6 import IPv6, IPv6ExtHdrRouting, ICMPv6EchoRequest
 from scapy.sendrecv import sendp, sr
+from scapy.volatile import RandString
+
 from functions import print_matrix
 
 
@@ -51,7 +53,7 @@ for k in range(len(list_of_network_addresses)):
     counter = 1
     while counter < len(list_of_network_addresses):
         if k != counter:
-            packet = IPv6(dst=list_of_network_addresses[counter]) / IPv6ExtHdrRouting(addresses=[list_of_network_addresses[k]], segleft=2) / TCP(dport=22)
+            packet = IPv6(dst=list_of_network_addresses[counter]) / IPv6ExtHdrRouting(addresses=[list_of_network_addresses[k]], segleft=2) / ICMPv6EchoRequest(data=RandString(7), verbose=0) / TCP(dport=22)
             if channel_type == "1":
                 packet.tc = 18
             elif channel_type == "2":
