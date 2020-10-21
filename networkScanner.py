@@ -51,7 +51,7 @@ for k in range(len(list_of_network_addresses)):
     counter = 1
     while counter < len(list_of_network_addresses):
         if k != counter:
-            packet = IPv6(dst=list_of_network_addresses[counter]) / IPv6ExtHdrRouting(addresses=[list_of_network_addresses[k]]) / TCP(dport=22)
+            packet = IPv6(dst=list_of_network_addresses[counter]) / IPv6ExtHdrRouting(addresses=[list_of_network_addresses[k]], segleft=1) / TCP(dport=22)
             if channel_type == "1":
                 packet.tc = 18
             elif channel_type == "2":
