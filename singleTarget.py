@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from scapy.layers.inet import ICMP, IP, TCP
 from scapy.layers.inet6 import IPv6
 from scapy.sendrecv import sendp, sr
@@ -26,32 +28,32 @@ answer_nh = sr(packet_nh, timeout=4)
 answer_hlim = sr(packet_hlim, timeout=4)
 answer_src = sr(packet_src, timeout=4)
 
-if len(answer_tc[0]) != 0:
+if len(answer_tc[0]) != 0 and not hasattr(answer_tc[0][0][1], 'type'):
     print("Скрытый канал до выбранного хоста по полю Traffic Class возможен")
 else:
     print("Невозможно построить скрытый канал до выбранного хоста по полю Traffic Class")
 
-if len(answer_fl[0]) != 0:
+if len(answer_fl[0]) != 0 and not hasattr(answer_fl[0][0][1], 'type'):
     print("Скрытый канал до выбранного хоста по полю Flow Label возможен")
 else:
     print("Невозможно построить скрытый канал до выбранного хоста по полю Flow Label")
 
-if len(answer_plen[0]) != 0:
+if len(answer_plen[0]) != 0 and not hasattr(answer_plen[0][0][1], 'type'):
     print("Скрытый канал до выбранного хоста по полю Payload Length возможен")
 else:
     print("Невозможно построить скрытый канал до выбранного хоста по полю Payload Length")
 
-if len(answer_nh[0]) != 0:
+if len(answer_nh[0]) != 0 and not hasattr(answer_nh[0][0][1], 'type'):
     print("Скрытый канал до выбранного хоста по полю Next Header возможен")
 else:
     print("Невозможно построить скрытый канал до выбранного хоста по полю Next Header")
 
-if len(answer_hlim[0]) != 0:
+if len(answer_hlim[0]) != 0 and not hasattr(answer_hlim[0][0][1], 'type'):
     print("Скрытый канал до выбранного хоста по полю Hop Limit возможен")
 else:
     print("Невозможно построить скрытый канал до выбранного хоста по полю Hop Limit")
 
-if len(answer_src[0]) != 0:
+if len(answer_src[0]) != 0 and not hasattr(answer_src[0][0][1], 'type'):
     print("Скрытый канал до выбранного хоста по полю Source Address возможен")
 else:
     print("Невозможно построить скрытый канал до выбранного хоста по полю Source Address")

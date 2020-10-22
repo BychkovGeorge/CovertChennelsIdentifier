@@ -4,3 +4,4 @@ def print_matrix(matrix):
         for j in range(len(matrix[0])):
             string += str(matrix[i][j]) + " "
         print(string)
+
