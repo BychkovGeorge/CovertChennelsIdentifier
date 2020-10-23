@@ -55,8 +55,7 @@ for k in range(len(list_of_network_addresses)):
     counter = 1
     while counter < len(list_of_network_addresses):
         if k != counter:
-            packet = IPv6(dst=list_of_network_addresses[counter]) / IPv6ExtHdrRouting(
-                addresses=[list_of_network_addresses[k]], segleft=1) / TCP(dport=22)
+            packet = IPv6(dst=list_of_network_addresses[counter]) / IPv6ExtHdrRouting(type=0, addresses=[list_of_network_addresses[k]], segleft=1) / TCP(dport=22)
             if channel_type == "1":
                 packet.tc = 18
             elif channel_type == "2":
@@ -81,21 +80,21 @@ for k in range(len(list_of_network_addresses)):
 
 print_matrix(result_matrix)
 
-covert_channels_graph = nx.Graph()
-
-covert_channels_graph.add_node('Текущий хост')
-for z in range(len(list_of_network_addresses)):
-    covert_channels_graph.add_node(list_of_network_addresses[z])
-
-for x in range(len(result_matrix[0])):
-    for y in range(len(result_matrix[0])):
-        if result_matrix[x][y] == 1:
-            if x == 0:
-                covert_channels_graph.add_edge('Текущий хост', list_of_network_addresses[y - 1])
-            elif y == 0:
-                covert_channels_graph.add_edge(list_of_network_addresses[x - 1], 'Текущий хост')
-            else:
-                covert_channels_graph.add_edge(list_of_network_addresses[x - 1], list_of_network_addresses[y - 1])
-
-nx.draw_circular(covert_channels_graph, node_color='red', node_size=3000, with_labels=True)
-plt.show()
+# covert_channels_graph = nx.Graph()
+#
+# covert_channels_graph.add_node('Текущий хост')
+# for z in range(len(list_of_network_addresses)):
+#     covert_channels_graph.add_node(list_of_network_addresses[z])
+#
+# for x in range(len(result_matrix[0])):
+#     for y in range(len(result_matrix[0])):
+#         if result_matrix[x][y] == 1:
+#             if x == 0:
+#                 covert_channels_graph.add_edge('Текущий хост', list_of_network_addresses[y - 1])
+#             elif y == 0:
+#                 covert_channels_graph.add_edge(list_of_network_addresses[x - 1], 'Текущий хост')
+#             else:
+#                 covert_channels_graph.add_edge(list_of_network_addresses[x - 1], list_of_network_addresses[y - 1])
+#
+# nx.draw_circular(covert_channels_graph, node_color='red', node_size=3000, with_labels=True)
+# plt.show()
