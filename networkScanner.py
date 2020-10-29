@@ -13,6 +13,7 @@ import itertools
 import networkx as nx
 import numpy.random as rnd
 import matplotlib.pyplot as plt
+from scapy.utils import PcapWriter
 
 from functions import print_matrix
 
@@ -83,7 +84,10 @@ for j in range(len(list_of_network_addresses)):
     if len(answer_src[0]) != 0 and not hasattr(answer_src[0][0][1], "type"):
         graph_src.add_edge('Текущий хост Source Address', str(list_of_network_addresses[j]), label='src')
 
-    print(packet_tc.summary())
+    dump = PcapWriter("test.pcap", append=True, sync=True)
+    dump.write(packet_fl)
+
+
 
 # блок с использованием дополнительного заголовка маршрутизации
 #
