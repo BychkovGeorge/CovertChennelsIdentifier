@@ -1,19 +1,10 @@
 # -*- coding: utf-8 -*-
 
-import os
-import sys
-import scapy as scapy
-
-from scapy.layers.inet import ICMP, IP, TCP
+from scapy.layers.inet import TCP
 from scapy.layers.inet6 import IPv6, IPv6ExtHdrRouting, ICMPv6EchoRequest
 from scapy.sendrecv import sendp, sr
-from graphviz import Digraph
-from scapy.volatile import RandString
-import itertools
 import networkx as nx
-import numpy.random as rnd
 import matplotlib.pyplot as plt
-from scapy.utils import PcapWriter
 
 from functions import print_matrix
 
@@ -84,8 +75,6 @@ for j in range(len(list_of_network_addresses)):
     if len(answer_src[0]) != 0 and not hasattr(answer_src[0][0][1], "type"):
         graph_src.add_edge('Текущий хост Source Address', str(list_of_network_addresses[j]), label='src')
 
-    dump = PcapWriter("test.pcap", append=True, sync=True)
-    dump.write(packet_fl)
 
 
 
@@ -117,17 +106,6 @@ for j in range(len(list_of_network_addresses)):
 #                 result_matrix[k + 1][counter + 1] = 1
 #                 result_matrix[counter + 1][k + 1] = 1
 #         counter += 1
-
-
-# for x in range(len(result_matrix[0])):
-#     for y in range(len(result_matrix[0])):
-#         if result_matrix[x][y] == 1:
-#             if x == 0:
-#                 covert_channels_graph.add_edge('Текущий хост', list_of_network_addresses[y - 1])
-#             elif y == 0:
-#                 covert_channels_graph.add_edge(list_of_network_addresses[x - 1], 'Текущий хост')
-#             else:
-#                 covert_channels_graph.add_edge(list_of_network_addresses[x - 1], list_of_network_addresses[y - 1])
 
 nx.draw_circular(graph_tc, node_color='blue', node_size=10000, with_labels=True, label='graph_tc')
 plt.show()
