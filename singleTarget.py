@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
-from scapy.layers.inet import ICMP, IP, TCP
+from scapy.layers.inet import TCP
 from scapy.layers.inet6 import IPv6
-from scapy.sendrecv import sendp, sr
+from scapy.sendrecv import sr
 
 print("Введите IPv6 адрес хоста, для которого вы хотите выполнить идентификацию скрытых каналов")
 ipv6_addr = input()

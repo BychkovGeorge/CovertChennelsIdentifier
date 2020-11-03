@@ -1,12 +1,10 @@
 # -*- coding: utf-8 -*-
 
 from scapy.layers.inet import TCP
-from scapy.layers.inet6 import IPv6, IPv6ExtHdrRouting, ICMPv6EchoRequest
-from scapy.sendrecv import sendp, sr
+from scapy.layers.inet6 import IPv6
+from scapy.sendrecv import sr
 import networkx as nx
 import matplotlib.pyplot as plt
-
-from functions import print_matrix
 
 print("Введите IPv6 адреса хостов сети через запятую, кроме адреса текущего хоста")
 network_addresses = input()
@@ -76,37 +74,6 @@ for j in range(len(list_of_network_addresses)):
         graph_src.add_edge('Текущий хост Source Address', str(list_of_network_addresses[j]), label='src')
 
 
-
-
-# блок с использованием дополнительного заголовка маршрутизации
-#
-# for k in range(len(list_of_network_addresses)):
-#     counter = 1
-#     while counter < len(list_of_network_addresses):
-#         if k != counter:
-#             packet = IPv6(dst=list_of_network_addresses[counter]) / IPv6ExtHdrRouting(type=2, addresses=[list_of_network_addresses[k]]) / ICMPv6EchoRequest() / TCP(dport=22) / "test"
-#             if channel_type == "1":
-#                 packet.tc = 18
-#             elif channel_type == "2":
-#                 packet.fl = 18
-#             elif channel_type == "3":
-#                 packet.plen = 18
-#             elif channel_type == "4":
-#                 packet.nh = 18
-#             elif channel_type == "5":
-#                 packet.hlim = 18
-#             elif channel_type == "6":
-#                 packet.src = 18
-#             else:
-#                 print("Ошибка ввода")
-#                 raise SystemExit
-#             answer = sr(packet, timeout=4)
-#             if len(answer[0]) != 0:
-#                 print(answer[0][0])
-#                 result_matrix[k + 1][counter + 1] = 1
-#                 result_matrix[counter + 1][k + 1] = 1
-#         counter += 1
-
 nx.draw_circular(graph_tc, node_color='blue', node_size=10000, with_labels=True, label='graph_tc')
 plt.show()
 nx.draw_circular(graph_fl, node_color='red', node_size=10000, with_labels=True, label='graph_fl')
@@ -119,4 +86,3 @@ nx.draw_circular(graph_hlim, node_color='purple', node_size=10000, with_labels=T
 plt.show()
 nx.draw_circular(graph_src, node_color='orange', node_size=10000, with_labels=True, label='graph_tc')
 plt.show()
-
