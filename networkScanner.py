@@ -59,9 +59,8 @@ for j in range(len(list_of_network_addresses)):
     answer_hlim = sr(packet_hlim, timeout=4)
     answer_src = sr(packet_src, timeout=4)
 
-
     if len(answer_tc[0]) != 0 and not hasattr(answer_tc[0][0][1], "type"):
-        graph_tc.add_edge('Текущий хост Traffic Class', str(list_of_network_addresses[j]))
+        graph_tc.add_edge('Текущий хост Traffic Class', str(list_of_network_addresses[j]), edge_color='r')
     if len(answer_fl[0]) != 0 and not hasattr(answer_fl[0][0][1], "type"):
         graph_fl.add_edge('Текущий хост Flow Label', str(list_of_network_addresses[j]), label='fl')
     if len(answer_plen[0]) != 0 and not hasattr(answer_plen[0][0][1], "type"):
@@ -72,7 +71,6 @@ for j in range(len(list_of_network_addresses)):
         graph_hlim.add_edge('Текущий хост Hop Limit', str(list_of_network_addresses[j]), label='hlim')
     if len(answer_src[0]) != 0 and not hasattr(answer_src[0][0][1], "type"):
         graph_src.add_edge('Текущий хост Source Address', str(list_of_network_addresses[j]), label='src')
-
 
 nx.draw_circular(graph_tc, node_color='blue', node_size=10000, with_labels=True, label='graph_tc')
 plt.show()
