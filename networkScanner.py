@@ -10,12 +10,12 @@ print("Введите IPv6 адреса хостов сети через зап�
 network_addresses = input()
 list_of_network_addresses = network_addresses.split(", ")
 
-graph_tc = nx.path_graph()
-graph_fl = nx.path_graph()
-graph_plen = nx.path_graph()
-graph_nh = nx.path_graph()
-graph_hlim = nx.path_graph()
-graph_src = nx.path_graph()
+graph_tc = nx.Graph()
+graph_fl = nx.Graph()
+graph_plen = nx.Graph()
+graph_nh = nx.Graph()
+graph_hlim = nx.Graph()
+graph_src = nx.Graph()
 
 for z in range(len(list_of_network_addresses)):
     graph_tc.add_node(list_of_network_addresses[z])
@@ -37,12 +37,12 @@ for x in range(len(list_of_network_addresses)):
             print("Введите 1 если да и 0, если нет")
             val = input()
             if val == "1":
-                graph_tc.add_edge(list_of_network_addresses[x], list_of_network_addresses[y])
-                graph_fl.add_edge(list_of_network_addresses[x], list_of_network_addresses[y])
-                graph_plen.add_edge(list_of_network_addresses[x], list_of_network_addresses[y])
-                graph_nh.add_edge(list_of_network_addresses[x], list_of_network_addresses[y])
-                graph_hlim.add_edge(list_of_network_addresses[x], list_of_network_addresses[y])
-                graph_src.add_edge(list_of_network_addresses[x], list_of_network_addresses[y])
+                graph_tc.add_edge(list_of_network_addresses[x], list_of_network_addresses[y], color='b', weight=1)
+                graph_fl.add_edge(list_of_network_addresses[x], list_of_network_addresses[y], color='b', weight=1)
+                graph_plen.add_edge(list_of_network_addresses[x], list_of_network_addresses[y], color='b', weight=1)
+                graph_nh.add_edge(list_of_network_addresses[x], list_of_network_addresses[y], color='b', weight=1)
+                graph_hlim.add_edge(list_of_network_addresses[x], list_of_network_addresses[y], color='b', weight=1)
+                graph_src.add_edge(list_of_network_addresses[x], list_of_network_addresses[y], color='b', weight=1)
 
 
 for j in range(len(list_of_network_addresses)):

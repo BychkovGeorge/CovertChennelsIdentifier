@@ -1,10 +1,11 @@
 import networkx as nx
 import matplotlib.pyplot as plt
 
-g = nx.Graph()
+g = nx.path_graph(2)
 
 g.add_node('A')
 g.add_node('B')
+g.add_edge('A', 'B', color='b', weight=1)
 g.add_edge('A', 'B', color='r', weight=6)
 
 edges = g.edges()
