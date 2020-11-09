@@ -3,9 +3,22 @@
 from scapy.layers.inet import TCP
 from scapy.layers.inet6 import IPv6
 from scapy.sendrecv import sr
+import json
 
 print("Введите IPv6 адрес хоста, для которого вы хотите выполнить идентификацию скрытых каналов")
 ipv6_addr = input()
+result = """
+{
+    "addr": "",
+    "tc": "",
+    "fl": "",
+    "plen": "",
+    "nh": "",
+    "hlim": "",
+    "src": ""
+}"""
+result_json = json.loads(result)
+result_json["addr"] = ipv6_addr
 
 packet_tc = IPv6(dst=ipv6_addr) / TCP(dport=22)
 packet_fl = IPv6(dst=ipv6_addr) / TCP(dport=22)
@@ -29,31 +42,35 @@ answer_hlim = sr(packet_hlim, timeout=4)
 answer_src = sr(packet_src, timeout=4)
 
 if len(answer_tc[0]) != 0 and not hasattr(answer_tc[0][0][1], 'type'):
-    print("Скрытый канал до выбранного хоста по полю Traffic Class возможен")
+    result_json["tc"] = "True"
 else:
-    print("Невозможно построить скрытый канал до выбранного хоста по полю Traffic Class")
-
+    result_json["tc"] = "False"
 if len(answer_fl[0]) != 0 and not hasattr(answer_fl[0][0][1], 'type'):
-    print("Скрытый канал до выбранного хоста по полю Flow Label возможен")
+    result_json["fl"] = "True"
 else:
-    print("Невозможно построить скрытый канал до выбранного хоста по полю Flow Label")
+    result_json["fl"] = "False"
 
 if len(answer_plen[0]) != 0 and not hasattr(answer_plen[0][0][1], 'type'):
-    print("Скрытый канал до выбранного хоста по полю Payload Length возможен")
+    result_json["plen"] = "True"
 else:
-    print("Невозможно построить скрытый канал до выбранного хоста по полю Payload Length")
+    result_json["plen"] = "False"
 
 if len(answer_nh[0]) != 0 and not hasattr(answer_nh[0][0][1], 'type'):
-    print("Скрытый канал до выбранного хоста по полю Next Header возможен")
+    result_json["nh"] = "True"
 else:
-    print("Невозможно построить скрытый канал до выбранного хоста по полю Next Header")
+    result_json["nh"] = "False"
 
 if len(answer_hlim[0]) != 0 and not hasattr(answer_hlim[0][0][1], 'type'):
-    print("Скрытый канал до выбранного хоста по полю Hop Limit возможен")
+    result_json["hlim"] = "True"
 else:
-    print("Невозможно построить скрытый канал до выбранного хоста по полю Hop Limit")
+    result_json["hlim"] = "False"
 
 if len(answer_src[0]) != 0 and not hasattr(answer_src[0][0][1], 'type'):
-    print("Скрытый канал до выбранного хоста по полю Source Address возможен")
+    result_json["src"] = "True"
 else:
-    print("Невозможно построить скрытый канал до выбранного хоста по полю Source Address")
+    result_json["src"] = "False"
+
+print(result_json)
+f = open('res.json', 'w')
+f.write(json.dumps(result_json))
+f.close()
