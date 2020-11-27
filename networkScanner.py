@@ -80,37 +80,42 @@ for j in range(len(list_of_network_addresses)):
             if len(nx.dijkstra_path(graph_fl, list_of_network_addresses[0], list_of_network_addresses[j])) == 2:
                 graph_fl.add_edge(str(list_of_network_addresses[0]), str(list_of_network_addresses[j]), color='r', weight=6)
             else:
-                for index in range(len(nx.dijkstra_path(graph_fl, list_of_network_addresses[0], list_of_network_addresses[j]))):
-                    if index != len(nx.dijkstra_path(graph_fl, list_of_network_addresses[0], list_of_network_addresses[j])) - 1:
-                        graph_fl.add_edge(str(list_of_network_addresses[index]), str(list_of_network_addresses[index + 1]), color='r', weight=6)
+                arr_of_fl_path = nx.dijkstra_path(graph_tc, list_of_network_addresses[0], list_of_network_addresses[j])
+                for index in range(len(arr_of_fl_path) - 1):
+                    if index != len(arr_of_fl_path) - 1:
+                        graph_fl.add_edge(str(arr_of_fl_path[index]), str(arr_of_fl_path[index + 1]), color='r', weight=6)
         if len(answer_plen[0]) != 0 and not hasattr(answer_plen[0][0][1], "type"):
             if len(nx.dijkstra_path(graph_plen, list_of_network_addresses[0], list_of_network_addresses[j])) == 2:
                 graph_plen.add_edge(str(list_of_network_addresses[0]), str(list_of_network_addresses[j]), color='r', weight=6)
             else:
-                for index in range(len(nx.dijkstra_path(graph_plen, list_of_network_addresses[0], list_of_network_addresses[j]))):
-                    if index != len(nx.dijkstra_path(graph_plen, list_of_network_addresses[0], list_of_network_addresses[j])) - 1:
-                        graph_plen.add_edge(str(list_of_network_addresses[index]), str(list_of_network_addresses[index + 1]), color='r', weight=6)
+                arr_of_plen_path = nx.dijkstra_path(graph_tc, list_of_network_addresses[0], list_of_network_addresses[j])
+                for index in range(len(arr_of_plen_path) - 1):
+                    if index != len(arr_of_plen_path) - 1:
+                        graph_plen.add_edge(str(arr_of_plen_path[index]), str(arr_of_plen_path[index + 1]), color='r', weight=6)
         if len(answer_nh[0]) != 0 and not hasattr(answer_nh[0][0][1], "type"):
             if len(nx.dijkstra_path(graph_nh, list_of_network_addresses[0], list_of_network_addresses[j])) == 2:
                 graph_nh.add_edge(str(list_of_network_addresses[0]), str(list_of_network_addresses[j]), color='r', weight=6)
             else:
-                for index in range(len(nx.dijkstra_path(graph_nh, list_of_network_addresses[0], list_of_network_addresses[j]))):
-                    if index != len(nx.dijkstra_path(graph_nh, list_of_network_addresses[0], list_of_network_addresses[j])) - 1:
-                        graph_nh.add_edge(str(list_of_network_addresses[index]), str(list_of_network_addresses[index + 1]), color='r', weight=6)
+                arr_of_nh_path = nx.dijkstra_path(graph_tc, list_of_network_addresses[0], list_of_network_addresses[j])
+                for index in range(len(arr_of_nh_path) - 1):
+                    if index != len(arr_of_nh_path) - 1:
+                        graph_nh.add_edge(str(arr_of_nh_path[index]), str(arr_of_nh_path[index + 1]), color='r', weight=6)
         if len(answer_hlim[0]) != 0 and not hasattr(answer_hlim[0][0][1], "type"):
             if len(nx.dijkstra_path(graph_hlim, list_of_network_addresses[0], list_of_network_addresses[j])) == 2:
                 graph_hlim.add_edge(str(list_of_network_addresses[0]), str(list_of_network_addresses[j]), color='r', weight=6)
             else:
-                for index in range(len(nx.dijkstra_path(graph_hlim, list_of_network_addresses[0], list_of_network_addresses[j]))):
-                    if index != len(nx.dijkstra_path(graph_hlim, list_of_network_addresses[0], list_of_network_addresses[j])) - 1:
-                        graph_hlim.add_edge(str(list_of_network_addresses[index]), str(list_of_network_addresses[index + 1]), color='r', weight=6)
+                arr_of_hlim_path = nx.dijkstra_path(graph_tc, list_of_network_addresses[0], list_of_network_addresses[j])
+                for index in range(len(arr_of_hlim_path) - 1):
+                    if index != len(arr_of_hlim_path) - 1:
+                        graph_hlim.add_edge(str(arr_of_hlim_path[index]), str(arr_of_hlim_path[index + 1]), color='r', weight=6)
         if len(answer_src[0]) != 0 and not hasattr(answer_src[0][0][1], "type"):
             if len(nx.dijkstra_path(graph_src, list_of_network_addresses[0], list_of_network_addresses[j])) == 2:
                 graph_src.add_edge(str(list_of_network_addresses[0]), str(list_of_network_addresses[j]), color='r', weight=6)
             else:
-                for index in range(len(nx.dijkstra_path(graph_src, list_of_network_addresses[0], list_of_network_addresses[j]))):
-                    if index != len(nx.dijkstra_path(graph_src, list_of_network_addresses[0], list_of_network_addresses[j])) - 1:
-                        graph_src.add_edge(str(list_of_network_addresses[index]), str(list_of_network_addresses[index + 1]), color='r', weight=6)
+                arr_of_src_path = nx.dijkstra_path(graph_tc, list_of_network_addresses[0], list_of_network_addresses[j])
+                for index in range(len(arr_of_src_path) - 1):
+                    if index != len(arr_of_src_path) - 1:
+                        graph_src.add_edge(str(arr_of_src_path[index]), str(arr_of_src_path[index + 1]), color='r', weight=6)
 
 
 edges_tc = graph_tc.edges()
