@@ -74,7 +74,7 @@ for j in range(len(list_of_network_addresses)):
             else:
                 for index in range(len(nx.dijkstra_path(graph_tc, list_of_network_addresses[0], list_of_network_addresses[j]))):
                     if index != len(nx.dijkstra_path(graph_tc, list_of_network_addresses[0], list_of_network_addresses[j])) - 1:
-                        graph_tc.add_edge(str(list_of_network_addresses[index]), str(list_of_network_addresses[index + 1]), color='r', weight=6)
+                        graph_tc.add_edge(str(nx.dijkstra_path(graph_tc, list_of_network_addresses[0], list_of_network_addresses[j])[index]), str(nx.dijkstra_path(graph_tc, list_of_network_addresses[0], list_of_network_addresses[j])[index + 1]), color='r', weight=6)
         if len(answer_fl[0]) != 0 and not hasattr(answer_fl[0][0][1], "type"):
             if len(nx.dijkstra_path(graph_fl, list_of_network_addresses[0], list_of_network_addresses[j])) == 2:
                 graph_fl.add_edge(str(list_of_network_addresses[0]), str(list_of_network_addresses[j]), color='r', weight=6)
